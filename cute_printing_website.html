@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Untuk Awaaa! 🙌🌟</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+            background-size: 400% 400%;
+            animation: gradientMove 8s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #ff6b9d;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .click-button {
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            border: none;
+            padding: 20px 40px;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .click-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .click-button:hover::before {
+            left: 100%;
+        }
+
+        .click-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.6);
+        }
+
+        .click-button:active {
+            transform: translateY(0);
+        }
+
+        .printer-container {
+            display: none;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .printer {
+            width: 200px;
+            height: 120px;
+            background: #34495e;
+            border-radius: 10px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .printer::before {
+            content: '🖨️';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+        }
+
+        .paper {
+            width: 160px;
+            height: 200px;
+            background: rgb(228, 227, 227);
+            border-radius: 5px;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .paper.printing {
+            animation: printAnimation 3s ease-out forwards;
+        }
+
+        @keyframes printAnimation {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-50px);
+            }
+            30% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(20px);
+            }
+        }
+
+        .paper:hover {
+            transform: translateX(-50%) translateY(15px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .paper-content {
+            padding: 20px;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
+        }
+
+        .click-instruction {
+            margin-top: 20px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: #ff6b9d;
+            animation: pulse 2s ease-in-out infinite;
+            display: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.5s ease-out;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: #ff6b9d;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #c44569;
+        }
+
+        .modal h2 {
+            color: #ff6b9d;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal p {
+            line-height: 1.6;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .img-ucing {
+            width: 50%;
+            height: auto;
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #ffd700;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .printer {
+                width: 150px;
+                height: 90px;
+            }
+            
+            .paper {
+                width: 120px;
+                height: 150px;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    <div class="sparkles" id="sparkles"></div>
+    
+    <div class="container">
+        <h1 class="title">✨ Aku ada sesuatu, di buka yaa! ✨</h1>
+        
+        <button class="click-button" id="clickButton" onclick="startPrinting()">
+            🌟 Klik Akuu! 🌟
+        </button>
+        
+        <div class="printer-container" id="printerContainer">
+            <div class="printer"></div>
+            <div class="paper" id="paper" onclick="showDetail()">
+                <div class="paper-content">
+                    <h3>🙌 Surat Spesial 🙌</h3>
+                    <p>Untuk Awaa ...</p>
+                    <p>━━━━━━━━━━━━━━━</p>
+                    <p>Klik untuk membaca!</p>
+                    <p>📄✨</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="click-instruction" id="clickInstruction">
+            👆 Klik kertas yang sudah di-print ya Awaa!
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2> <span>HALLO</span> AWAA </h2>
+            <p>
+                Halo Awaa, atau dipanggil de awaa atau onty awaa😊🙌🌟<br><br>
+                
+                Sebenarnya aku bingung mau ngomong apa, dan sepertinya ada banyak rasa terima kasih yang mau aku kasih tau ke kamu, jadii maaf ya kalau panjang<br><br>
+                Selamat membaca 👌<br><br>
+                awaa, aku senang sekali bisa kenal sama kamu, meskipun rasanya aneh sekali kita bertemu saat aku sedang berenang dirumput yang hijau itu 😭😭.
+                <br><br>
+                tapi lebih aneh lagi karna kamu mau dengerin cerita sedih orang random yang sangat putus asa ini, saat itu aku lumayan kaget pas tau kamu relog berkali kali cuman karna ga enak kamu disconnect disaat aku cerita. aku sangat menghargai itu awaa, kamu baik sekaliiiiiiiii🙌🌟🙌🌟
+                <br><br>
+                aku sangat senang disetiap aku bisa cerita sama kamu, kamu benar benar orang yang sangat asik dan cherrfull awaa.
+                sebenarnya aku beneran sedih pas kamu bilang gabisa sering call dan cerita lgi apalagi kmu selalu bilang soal hapus dc, aku takut gabisa ngerjain kamu pas tidur lagi, nanti siapa coba yang jawab jawabin omongan kamu pas tidur ehehehe bercanda😊🙌🌟. <br><br>
+
+
+
+                aku sangat bersyukur sekali bisa kenal kamu, kamu benar benar sangat baik, makasih ya awaaa sudah menemani kegaulan dan ke hopeless an aku, jangan lama lama see you laternya, kalau bisa sejam aja yaa ehe👌. <br><br>
+
+                Pokoknyaa semangaat kuliahnya yaa, kalo mau cerita atau nangis aku selalu free kok, jgn tanya aku ada cerita atau engga, aku selalu ada ceritaa kok👌🌟.
+                <br><br>
+                
+                Semoga hari-hari Awaa selalu dipenuhi dengan kebahagiaan, tawa, dan hal-hal indah lainnya! 🌈<br><br>
+                
+                Kamu adalah orang yang spesial, dan jangan pernah lupa bahwa kamu berharga! 💎<br><br>
+                
+                segitu saja mungkin dari aku, terimakasih sudah membaca sampai akhir😌🙌🌟, maaf kalau tulisan aku sangat aneh dan sulit dimengerti😁😌✌🌟.<br><br>
+
+                Salam Dari,<br>
+                🙌 ILHAM SI PERENANG RUMPUT 🙌<br><br>
+
+                <img class="img-ucing" src="ucing.jpeg" alt="" srcset="">
+                <p style="font-size: 0.7em;">(UCING BOBO)</p>
+                <br><br>
+                
+                <em style="font-size: 0.6em;">P.S: Kamu bisa tekan tombol "Click Me" lagi untuk melihat animasi printing yang lucu! 🖨️✨</em>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let isFirstClick = true;
+
+        function startPrinting() {
+            const button = document.getElementById('clickButton');
+            const printerContainer = document.getElementById('printerContainer');
+            const paper = document.getElementById('paper');
+            const instruction = document.getElementById('clickInstruction');
+            
+            // Hide button with animation
+            button.style.transform = 'scale(0)';
+            button.style.opacity = '0';
+            
+            // Create sparkles effect
+            createSparkles();
+            
+            setTimeout(() => {
+                button.style.display = 'none';
+                printerContainer.style.display = 'block';
+                
+                // Start printing animation
+                setTimeout(() => {
+                    paper.classList.add('printing');
+                    
+                    // Show instruction after printing
+                    setTimeout(() => {
+                        instruction.style.display = 'block';
+                        createHearts();
+                    }, 2000);
+                }, 500);
+                
+                // Reset for next click (if any)
+                setTimeout(() => {
+                    if (!isFirstClick) {
+                        button.style.display = 'inline-block';
+                        button.style.transform = 'scale(1)';
+                        button.style.opacity = '1';
+                        button.style.transition = 'all 0.5s ease';
+                    }
+                }, 4000);
+            }, 300);
+        }
+
+        function showDetail() {
+            document.getElementById('modal').style.display = 'block';
+            createSparkles();
+            isFirstClick = false;
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartSymbols = ['💖', '💕', '💗', '🌸', '✨'];
+            
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    heartsContainer.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 6000);
+                }, i * 200);
+            }
+        }
+
+        function createSparkles() {
+            const sparklesContainer = document.getElementById('sparkles');
+            const sparkleSymbols = ['✨', '⭐', '🌟', '💫'];
+            
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = sparkleSymbols[Math.floor(Math.random() * sparkleSymbols.length)];
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                sparklesContainer.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 2000);
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Add some random sparkles on load
+        window.onload = function() {
+            setTimeout(createSparkles, 1000);
+            
+            // Random sparkles every 10 seconds
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    createSparkles();
+                }
+            }, 10000);
+        }
+    </script>
+</body>
+</html>
